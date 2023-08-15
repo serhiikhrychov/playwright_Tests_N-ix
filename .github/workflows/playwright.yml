@@ -22,10 +22,6 @@ jobs:
           sudo apt-get remove docker docker-engine docker.io containerd runc
           sudo apt-get autoremove
           sudo apt-get autoclean
-      - name: Install Docker using official script
-        run: |
-          curl -fsSL https://get.docker.com -o get-docker.sh
-          sudo sh get-docker.sh
       - name: Set up Docker Compose
         run: |
           sudo apt-get update
