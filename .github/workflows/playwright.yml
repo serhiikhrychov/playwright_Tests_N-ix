@@ -17,6 +17,19 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+    - name: Set up Docker
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install docker.io docker-compose
+          docker --version
+          docker-compose --version
+
+      - name: Start Docker Compose services
+        run: docker-compose up -d
+
+      - name: Wait for app to start
+        run: sleep 10  # Adjust as needed  
+      
     - name: Run Playwright tests
       run: npx playwright test
     - uses: actions/upload-artifact@v3
@@ -25,3 +38,5 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+    - name: Stop Docker Compose services
+        run: docker-compose down
