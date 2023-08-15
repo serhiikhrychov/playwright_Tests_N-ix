@@ -1,13 +1,9 @@
 name: Playwright Tests
 on:
   push:
-    branches:
-      - main
-      - master
+    branches: [main, master]
   pull_request:
-    branches:
-      - main
-      - master
+    branches: [main, master]
 jobs:
   test:
     timeout-minutes: 60
@@ -19,22 +15,6 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm ci
-      - name: Get installed Playwright version
-        run: >
-          NPM_JSON="$(npm info @playwright/test dist --json)"
-
-          PLAYWRIGHT_SHA=$(node -e "console.log(JSON.parse('$NPM_JSON').data.shasum)")
-
-          echo "PLAYWRIGHT_VERSION=$PLAYWRIGHT_SHA" >> $GITHUB_ENV
-
-          echo "Playwright VERSION SHA: $PLAYWRIGHT_SHA"
-      - name: Cache playwright binaries
-        uses: actions/cache@v3
-        id: playwright-cache
-        with:
-          path: |
-            /home/runner/.cache/ms-playwright
-        key: ${{ runner.os }}-playwright-v3-${{env.PLAYWRIGHT_VERSION}}
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Uninstall conflicting packages
