@@ -17,10 +17,19 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Set up Docker
+      - name: Uninstall conflicting packages
+        run: |
+          sudo apt-get remove docker docker-engine docker.io containerd runc
+          sudo apt-get autoremove
+          sudo apt-get autoclean
+      - name: Install Docker using official script
+        run: |
+          curl -fsSL https://get.docker.com -o get-docker.sh
+          sudo sh get-docker.sh
+      - name: Set up Docker Compose
         run: |
           sudo apt-get update
-          sudo apt-get -y install docker.io docker-compose
+          sudo apt-get -y install docker-compose
           docker --version
           docker-compose --version
       - name: Start Docker Compose services
