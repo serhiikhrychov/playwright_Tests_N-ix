@@ -20,7 +20,7 @@ export class LoginPage extends BasePage {
       await this.passwordInput.fill(password);
       await this.loginBtn.click();
     } else {
-      console.log("No username or password provided");
+      console.log("No username or password provided!");
     }
   }
 
