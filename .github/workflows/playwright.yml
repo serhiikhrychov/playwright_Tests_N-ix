@@ -30,7 +30,7 @@ jobs:
       - name: Start Docker Compose services
         run: docker-compose up -d
       - name: Wait for app to start
-        run: sleep 10  # Adjust as needed  
+        run: while ! nc -z localhost 8087; do sleep 1; done
       - name: Run Playwright tests
         run: npx playwright test
       - uses: actions/upload-artifact@v3
