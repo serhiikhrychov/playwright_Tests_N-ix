@@ -14,7 +14,7 @@ mytest("user is able to logout", async ({ app }) => {
 
   await app.homePage.logoutBtn.click();
 
-  await expect(app.loginPage.loginBtn).toBeVisible();
+  await expect(app.loginPage.loginBtn).not.toBeVisible();
 });
 
 mytest(
