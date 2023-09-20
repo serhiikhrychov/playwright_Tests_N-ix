@@ -37,13 +37,13 @@ jobs:
           BASE_URL: ${{vars.BASE_URL}}
           LOGIN_USERNAME: ${{secrets.LOGIN_USERNAME}}
           LOGIN_PASSWORD: ${{secrets.LOGIN_PASSWORD}}
+      - name: Get Docker Container Logs
+        run: docker-compose logs timecoder
       - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-      - name: Get Docker Container Logs
-        run: docker-compose logs timecoder
       - name: Stop Docker Compose services
         run: docker-compose down
