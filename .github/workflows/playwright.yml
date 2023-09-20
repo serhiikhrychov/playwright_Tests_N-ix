@@ -30,7 +30,7 @@ jobs:
       - name: Start Docker Compose services
         run: |
           docker-compose up -d
-          docker logs "${{ job.services.timecoder.id }}"
+          docker logs ${{ job.services['spirogov/timecoder'].id }}
       - name: Wait for app to start
         run: while ! nc -z localhost 8087; do sleep 1; done
       - name: Run Playwright tests
