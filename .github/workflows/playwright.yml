@@ -28,11 +28,11 @@ jobs:
           docker --version
           docker-compose --version
       - name: Start Docker Compose services
-        run: |
-          docker-compose up -d
-          docker logs ${{ job.services['spirogov/timecoder'].id }}
+        run: docker-compose up -d
       - name: Wait for app to start
         run: while ! nc -z localhost 8087; do sleep 1; done
+      - name: Get Docker Container Logs
+        run: docker logs ${{ job.services['spirogov/timecoder'].id }}
       - name: Run Playwright tests
         run: npx playwright test
         env:
