@@ -32,7 +32,7 @@ jobs:
       - name: Wait for app to start
         run: while ! nc -z localhost 8087; do sleep 1; done
       - name: Get Docker Container Logs
-        run: docker logs ${{ job.services['timecoder'].id }}
+        run: docker logs timecoder
       - name: Run Playwright tests
         run: npx playwright test
         env:
