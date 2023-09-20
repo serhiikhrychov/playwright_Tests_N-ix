@@ -43,5 +43,9 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+      - name: Dump logs
+        uses: jwalton/gh-docker-logs@v2
+        with:
+          images: 'spirogov/timecoder'
       - name: Stop Docker Compose services
         run: docker-compose down
