@@ -5,7 +5,7 @@ let tokenType: string;
 
 test.beforeAll(async ({ request }) => {
   const loginResponse = await request.post(
-    'http://localhost:8087/api/gateway/auth/signin',
+    'http://localhost:8089/api/gateway/auth/signin',
     {
       data: { usernameOrEmail: 'admin', password: '123456' },
     }
