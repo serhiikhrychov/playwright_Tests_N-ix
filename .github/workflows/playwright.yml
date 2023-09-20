@@ -28,7 +28,9 @@ jobs:
           docker --version
           docker-compose --version
       - name: Start Docker Compose services
-        run: docker-compose up -d
+        run: |
+          docker-compose up -d
+          docker logs "${{ job.services.timecoder.id }}"
       - name: Wait for app to start
         run: while ! nc -z localhost 8087; do sleep 1; done
       - name: Run Playwright tests
@@ -43,9 +45,5 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-      - name: Dump logs
-        uses: jwalton/gh-docker-logs@v2
-        with:
-          images: 'spirogov/timecoder'
       - name: Stop Docker Compose services
         run: docker-compose down
