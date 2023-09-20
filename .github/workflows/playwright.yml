@@ -44,6 +44,6 @@ jobs:
           path: playwright-report/
           retention-days: 30
       - name: Get Docker Container Logs
-        run: docker logs timecoder
+        run: docker-compose logs timecoder
       - name: Stop Docker Compose services
         run: docker-compose down
